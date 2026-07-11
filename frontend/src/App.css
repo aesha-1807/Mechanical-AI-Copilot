@@ -1,0 +1,31 @@
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#eceff3;
+}
+
+.app{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:5px;
+}
+
+h3{
+    text-align:center;
+    color:gray;
+    margin-top:0;
+}
+.chat-window{
+    height:60vh;
+    overflow-y:auto;
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 0 10px rgba(0,0,0,0.08);
+    margin-top:20px;
+}
