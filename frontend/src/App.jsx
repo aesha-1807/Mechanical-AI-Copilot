@@ -11,23 +11,37 @@ function App() {
   const [question, setQuestion] = useState("")
   
   const [loading, setLoading] = useState(false)
-  const [currentChat, setCurrentChat] = useState("default")
-  const [chatList, setChatList] = useState(["default"])
-  const [messages, setMessages] = useState(() => {
-
-  const savedMessages = localStorage.getItem(currentChat)
-
-  return savedMessages ? JSON.parse(savedMessages) : []
   
-})
+
+
+  const [messages, setMessages] = useState([])
   const chatEndRef = useRef(null)
 
   useEffect(() => {
-    localStorage.setItem(
-    currentChat,
+
+  localStorage.setItem(
+    "chatMessages",
     JSON.stringify(messages)
-    )
+  )
+
   }, [messages])
+  useEffect(() => {
+
+  const savedMessages = localStorage.getItem("chatMessages")
+
+  if (savedMessages) {
+
+    setMessages(JSON.parse(savedMessages))
+
+  }
+
+  }, [])
+
+
+
+
+
+
 
   useEffect(() => {
 
@@ -37,17 +51,7 @@ function App() {
 
   }, [messages])
 
-  useEffect(() => {
-
-    const savedMessages = localStorage.getItem(currentChat)
-
-    if (savedMessages) {
-    setMessages(JSON.parse(savedMessages))
-    } else {
-    setMessages([])
-    }
-
-  }, [currentChat])
+  
 
   async function askAI()
    
@@ -111,13 +115,13 @@ finally {
 
 function newChat() {
 
-  const chatName = `Chat ${chatList.length + 1}`
+  if (window.confirm("Start a new chat?")) {
 
-  setChatList([...chatList, chatName])
+    setMessages([])
 
-  setCurrentChat(chatName)
+    localStorage.removeItem("chatMessages")
 
-  setMessages([])
+  }
 
 }
 
@@ -126,12 +130,8 @@ function newChat() {
 <div className="layout">
 
   <Sidebar
-  chatList={chatList}
-  currentChat={currentChat}
-  setCurrentChat={setCurrentChat}
   newChat={newChat}
   />
-
   <div className="app">
 
     <h1>🤖 Mechanical AI Copilot</h1>

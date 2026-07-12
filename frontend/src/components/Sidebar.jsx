@@ -1,6 +1,7 @@
-function Sidebar({ chatList, currentChat, setCurrentChat, newChat }) {
+function Sidebar({ newChat }) {
 
   return (
+
     <div className="sidebar">
 
       <h2>🤖 Mechanical AI</h2>
@@ -13,25 +14,14 @@ function Sidebar({ chatList, currentChat, setCurrentChat, newChat }) {
 
       <div className="history">
 
-        {chatList.map((chat) => (
-
-          <p
-            key={chat}
-            onClick={() => setCurrentChat(chat)}
-            style={{
-              background:
-                currentChat === chat ? "#374151" : "transparent"
-            }}
-          >
-            💬 {chat}
-          </p>
-
-        ))}
+        <p>💬 Current Chat</p>
 
       </div>
 
     </div>
+
   )
+
 }
 
 export default Sidebar
