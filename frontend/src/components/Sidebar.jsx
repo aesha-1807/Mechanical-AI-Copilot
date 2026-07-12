@@ -1,8 +1,18 @@
-function Sidebar({ newChat }) {
+function Sidebar({
+  newChat,
+  sidebarOpen,
+  setSidebarOpen
+}) {
 
   return (
 
-    <div className="sidebar">
+    <div
+      className={
+       sidebarOpen
+        ? "sidebar open"
+         : "sidebar"
+      }
+    >
 
       <div className="sidebar-header">
 
@@ -13,8 +23,11 @@ function Sidebar({ newChat }) {
       </div>
 
       <button
-        className="new-chat-btn"
-        onClick={newChat}
+         className="new-chat-btn"
+         onClick={() => {
+         newChat();
+         setSidebarOpen(false);
+       }}
       >
         ➕ New Chat
       </button>

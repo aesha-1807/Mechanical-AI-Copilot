@@ -15,6 +15,7 @@ function App() {
 
 
   const [messages, setMessages] = useState([])
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const chatEndRef = useRef(null)
 
   useEffect(() => {
@@ -131,20 +132,35 @@ function newChat() {
 
   <Sidebar
   newChat={newChat}
-  />
+  sidebarOpen={sidebarOpen}
+  setSidebarOpen={setSidebarOpen}
+/>
   <div className="app">
 
-   <div className="header">
+  
 
-  <h1>
-    🤖 Mechanical AI Copilot
-  </h1>
+  
+    
+  <div className="topbar">
 
-  <p className="subtitle">
-    Powered by Gemini AI • Developed by Aesha Shah
-  </p>
+  <button
+    className="hamburger"
+    onClick={() => setSidebarOpen(!sidebarOpen)}
+  >
+    ☰
+  </button>
 
-</div>
+  <div className="header">
+
+    <h1>🤖 Mechanical AI Copilot</h1>
+
+    <p className="subtitle">
+      Powered by Gemini AI • Developed by Aesha Shah
+    </p>
+
+  </div>
+
+  </div>
     
 
       <div className="chat-window">
@@ -210,8 +226,8 @@ function newChat() {
     </div>
 
     <footer className="footer">
-      Mechanical AI Copilot v1.0
-      Powered by Gemini AI • Developed by Aesha Shah
+     <p>Mechanical AI Copilot v1.0</p>
+     <p>Powered by Gemini AI • Developed by Aesha Shah</p>
     </footer>
 
 
