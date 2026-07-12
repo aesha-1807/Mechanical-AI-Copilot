@@ -134,14 +134,36 @@ function newChat() {
   />
   <div className="app">
 
-    <h1>🤖 Mechanical AI Copilot</h1>
+   <div className="header">
 
-    <p className="subtitle">
+  <h1>
+    🤖 Mechanical AI Copilot
+  </h1>
+
+  <p className="subtitle">
     Powered by Gemini AI • Developed by Aesha Shah
-    </p>
+  </p>
+
+</div>
     
 
-    <div className="chat-window">
+      <div className="chat-window">
+
+       {messages.length === 0 && (
+
+       <div className="welcome">
+
+       <h2>
+      👋 Welcome to Mechanical AI Copilot
+       </h2>
+
+
+
+       </div>
+
+       )}
+
+
 
       {messages.map((message, index) => (
         <ChatMessage
@@ -151,8 +173,14 @@ function newChat() {
       ))}
 
       {loading && (
-        <p>⏳ Mechanical AI is thinking...</p>
-      )}
+
+      <div className="thinking">
+
+      🤖 Thinking...
+
+      </div>
+
+)}
 
       <div ref={chatEndRef}></div>
 
@@ -162,7 +190,7 @@ function newChat() {
 
       <input
         type="text"
-        placeholder="Ask anything about Mechanical Engineering..."
+        placeholder="Type your question here..."
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
         onKeyDown={(e) => {
@@ -173,13 +201,19 @@ function newChat() {
       />
 
       <button
-        onClick={askAI}
-        disabled={loading}
+       onClick={askAI}
+       disabled={loading}
       >
-        Ask
+       {loading ? "..." : "Send"}
       </button>
 
     </div>
+
+    <footer className="footer">
+      Mechanical AI Copilot v1.0
+      Powered by Gemini AI • Developed by Aesha Shah
+    </footer>
+
 
   </div>
 </div>

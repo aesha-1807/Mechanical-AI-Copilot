@@ -1,18 +1,10 @@
-
-
 import ReactMarkdown from "react-markdown";
+
 function ChatMessage({ message }) {
-function copyMessage() {
 
-  navigator.clipboard.writeText(message.text)
-
-  alert("Copied!")
-}
-
-
-
-
-
+  function copyMessage() {
+  navigator.clipboard.writeText(message.text);
+  }
 
   return (
     <div
@@ -23,27 +15,36 @@ function copyMessage() {
       }
     >
       <div className="message">
-        <strong>
-          {message.sender === "user"
-            ? "👤 You"
-            : "🤖 Mechanical AI"}
-        </strong>
 
-        <ReactMarkdown>
-         {message.text}
-        </ReactMarkdown>
+        <div className="message-header">
 
-        {
-        message.sender === "ai" && (
+          <span className="avatar">
+            {message.sender === "user" ? "👤" : "🤖"}
+          </span>
 
-        <button onClick={copyMessage}>
+          <span className="sender-name">
+            {message.sender === "user"
+              ? "You"
+              : "Mechanical AI Copilot"}
+          </span>
 
-        📋 Copy
+        </div>
 
-        </button>
+        <div className="message-content">
+          <ReactMarkdown>
+            {message.text}
+          </ReactMarkdown>
+        </div>
 
-        )
-        }
+        {message.sender === "ai" && (
+          <button
+            className="copy-btn"
+            onClick={copyMessage}
+          >
+            📋 Copy
+          </button>
+        )}
+
       </div>
     </div>
   );

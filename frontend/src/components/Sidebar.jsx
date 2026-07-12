@@ -4,17 +4,38 @@ function Sidebar({ newChat }) {
 
     <div className="sidebar">
 
-      <h2>🤖 Mechanical AI</h2>
+      <div className="sidebar-header">
 
-      <button onClick={newChat}>
+        <h2>🤖 Mechanical AI</h2>
+
+        <p>Copilot</p>
+
+      </div>
+
+      <button
+        className="new-chat-btn"
+        onClick={newChat}
+      >
         ➕ New Chat
       </button>
 
-      <hr />
+      <hr className="divider" />
 
       <div className="history">
 
-        <p>💬 Current Chat</p>
+        <h4>Recent Chat</h4>
+
+        <div className="history-card">
+
+          💬 Current Chat
+
+        </div>
+
+      </div>
+
+      <div className="sidebar-footer">
+
+        <p>⚙️ Version 1.0</p>
 
       </div>
 
