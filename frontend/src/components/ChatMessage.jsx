@@ -1,4 +1,6 @@
 import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 function ChatMessage({ message }) {
 
@@ -31,8 +33,11 @@ function ChatMessage({ message }) {
         </div>
 
         <div className="message-content">
-          <ReactMarkdown>
-            {message.text}
+          <ReactMarkdown
+           remarkPlugins={[remarkMath]}
+           rehypePlugins={[rehypeKatex]}
+          >
+           {message.text}
           </ReactMarkdown>
         </div>
 

@@ -9,6 +9,8 @@ body{
     background:#f3f4f6;
 }
 
+
+
 .layout{
     display:flex;
     height:100vh;
@@ -81,17 +83,50 @@ h3{
     text-align:center;
 }
 
-.chat-window{
+/*.chat-window{
     flex:1;
     min-height:400px;
-    background:white;
+
+    background-image:
+        linear-gradient(
+            
+        
+            rgba(255,255,255,0.985),
+            rgba(255,255,255,0.985)
+        ),
+        url("./assets/mechanical-bg.png");
+
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+
+    margin-top:20px;
+    border-radius:15px;
+    padding:20px;
+    overflow-y:auto;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+} */
+ .chat-window{
+    flex:1;
+    min-height:400px;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.75),
+            rgba(255,255,255,0.75)
+        ),
+        url("./assets/mechanical-bg.png");
+
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+
     margin-top:20px;
     border-radius:15px;
     padding:20px;
     overflow-y:auto;
     box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
-
 .user-row{
     display:flex;
     justify-content:flex-end;
@@ -333,6 +368,7 @@ h3{
     justify-content:center;
     position:relative;
     margin-bottom:20px;
+    min-height:60px;
 }
 
 .hamburger{
@@ -404,6 +440,21 @@ h3{
 
     .header h1{
     font-size:24px;
+    }
+
+    .topbar{
+    padding-left:55px;
+    }
+
+    .hamburger{
+    left:10px;
+    top:50%;
+    transform:translateY(-50%);
+    }
+
+    .header{
+    width:100%;
+    text-align:center;
     }
 
     .subtitle{

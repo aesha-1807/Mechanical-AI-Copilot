@@ -6,6 +6,7 @@ import './App.css'
 import ChatMessage from "./components/ChatMessage";
 import Sidebar from "./components/Sidebar";
 
+
 function App() {
 
   const [question, setQuestion] = useState("")
@@ -17,6 +18,8 @@ function App() {
   const [messages, setMessages] = useState([])
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const chatEndRef = useRef(null)
+
+  
 
   useEffect(() => {
 
@@ -136,6 +139,7 @@ function newChat() {
   setSidebarOpen={setSidebarOpen}
 />
   <div className="app">
+  
 
   
 
