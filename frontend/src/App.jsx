@@ -83,7 +83,8 @@ function App() {
 
 
     const response = await axios.post(
-    "https://mechanical-ai-copilot.onrender.com/chat",
+    
+    "http://127.0.0.1:8000/chat",
     {
         messages: updatedMessages
     }
@@ -156,10 +157,10 @@ function newChat() {
 
   <div className="header">
 
-    <h1>🤖 Mechanical AI Copilot</h1>
+    <h1>🤖 MechBot</h1>
 
     <p className="subtitle">
-      Powered by Gemini AI • Developed by Aesha Shah
+      Mechanical AI Copilot
     </p>
 
   </div>

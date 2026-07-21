@@ -1,23 +1,31 @@
-
 from typing import List
-
+import os
+import time
+import traceback
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from dotenv import load_dotenv
-from google import genai
-from google.genai import types
-import os
+from groq import Groq
 
+# -------------------------------
+# Load Environment Variables
+# -------------------------------
 
-app = FastAPI()
 load_dotenv()
 
-client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
+app = FastAPI()
+
+load_dotenv()
+
+client = Groq(
+    api_key=os.getenv("GROQ_API_KEY")
+).. cd
+# -------------------------------
+# CORS
+# -------------------------------
 
 app.add_middleware(
     CORSMiddleware,
@@ -31,6 +39,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# -------------------------------
+# Request Models
+# -------------------------------
+
 class Message(BaseModel):
     sender: str
     text: str
@@ -38,13 +50,13 @@ class Message(BaseModel):
 class ChatRequest(BaseModel):
     messages: List[Message]
 
-
-
+# -------------------------------
+# Routes
+# -------------------------------
 
 @app.get("/")
 def home():
     return {"message": "Welcome to Mechanical AI Copilot"}
-
 
 @app.get("/about")
 def about():
@@ -52,7 +64,6 @@ def about():
         "project": "Mechanical AI Copilot",
         "developer": "Aesha Shah"
     }
-
 
 @app.get("/material")
 def material():
@@ -62,6 +73,9 @@ def material():
         "strength": "310 MPa"
     }
 
+# -------------------------------
+# Chat Endpoint
+# -------------------------------
 
 @app.post("/chat")
 def chat(request: ChatRequest):
@@ -75,26 +89,36 @@ Rules:
 - Answer Mechanical Engineering questions accurately.
 - Explain concepts in simple language.
 - Use practical examples whenever possible.
-- If the user asks for formulas, explain each variable.
-- If the user asks unrelated questions, politely guide them back to Mechanical Engineering.
-- Be concise but educational.
+- Explain every formula clearly.
+- Stay focused on Mechanical Engineering.
 """
 
-    chat = client.chats.create(
-        model="gemini-3.5-flash",
-        config=types.GenerateContentConfig(
-            system_instruction=system_prompt
+    latest_message = request.messages[-1].text
+
+    try:
+
+        completion = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_prompt
+                },
+                {
+                    "role": "user",
+                    "content": latest_message
+                }
+            ],
+            temperature=0.4,
         )
-    )
 
-    reply = ""
+        return {
+            "reply": completion.choices[0].message.content
+        }
 
-    for message in request.messages:
+    except Exception as e:
+        print(e)
 
-        if message.sender == "user":
-            response = chat.send_message(message.text)
-            reply = response.text
-
-    return {
-        "reply": reply
-    }
+        return {
+            "reply": "⚠️ AI service temporarily unavailable."
+        }
